@@ -1,10 +1,10 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png">
   <div class="counter">
-    <h1>{{ count }}</h1>
+    <h1>{{ $store.state.count }}</h1>
     <div class="buttons">
-      <button @click="increaseCounter()">+</button>
-      <button @click="decreaseCounter()">-</button>
+      <button @click="$store.commit('increaseCounter')">+</button>
+      <button @click="$store.commit('decreaseCounter')">-</button>
     </div>
   </div>
 </template>
@@ -17,14 +17,6 @@ export default {
     return {
       count: 0
     }
-  },
-  methods: {
-    increaseCounter() {
-      this.count++
-    },
-    decreaseCounter() {
-      this.count--
-    },
   },
 }
 </script>
