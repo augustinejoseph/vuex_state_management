@@ -1,11 +1,17 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png">
   <div class="counter">
-    <h1>{{ $store.state.count }}</h1>
-    <div class="buttons">
-      <button @click="$store.commit('increaseCounter')">+</button>
-      <button @click="$store.commit('decreaseCounter')">-</button>
+    <h1 :style="{ color: $store.state.colorCode }">{{ $store.state.count }}</h1>
+    <div class="counter-squared">
+      {{ $store.state.count }}
+      <sup>2</sup> =
+      {{ $store.getters.getSquared }}
     </div>
+    <div class="buttons">
+      <button @click="$store.dispatch('increaseCounter')">+</button>
+      <button @click="$store.dispatch('decreaseCounter')">-</button>
+    </div>
+    <input v-model="handleColorCode" type="text" placeholder="Enter color">
   </div>
 </template>
 
@@ -13,6 +19,16 @@
 
 export default {
   name: 'App',
+  computed: {
+    handleColorCode: {
+      get() {
+        return this.$store.state.colorCode
+      },
+      set(typedColor) {
+        this.$store.commit('setColorCode', typedColor)
+      }
+    },
+  },
   data() {
     return {
       count: 0
