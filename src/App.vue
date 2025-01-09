@@ -1,33 +1,27 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png">
   <div class="counter">
-    <h1 :style="{ color: $store.state.colorCode }">{{ $store.state.count }}</h1>
-    <div class="counter-squared">
-      {{ $store.state.count }}
-      <sup>2</sup> =
-      {{ $store.getters.getSquared }}
-    </div>
-    <div class="buttons">
-      <button @click="$store.dispatch('increaseCounter')">+</button>
-      <button @click="$store.dispatch('decreaseCounter')">-</button>
-    </div>
-    <input v-model="handleColorCode" type="text" placeholder="Enter color">
+    <Counter />
+    <squared />
+    <Button />
+    <ColorCode />
   </div>
 </template>
 
 <script>
+import Button from './components/Button.vue';
+import Counter from './components/Counter.vue';
+import Squared from './components/Squared.vue';
+import ColorCode from './components/ColorCode.vue';
+
 
 export default {
   name: 'App',
-  computed: {
-    handleColorCode: {
-      get() {
-        return this.$store.state.colorCode
-      },
-      set(typedColor) {
-        this.$store.commit('setColorCode', typedColor)
-      }
-    },
+  components: {
+    Counter,
+    Squared,
+    Button,
+    ColorCode
   },
   data() {
     return {
